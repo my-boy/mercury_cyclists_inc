@@ -1,7 +1,4 @@
-package csci318.mercury_cyclists_inc.controller;
-
-import csci318.mercury_cyclists_inc.repository.ContactRepository;
-import csci318.mercury_cyclists_inc.model.Contact;
+package csci318.mercury_cyclists_inc.procurement;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +20,7 @@ public class ContactController {
 
     @GetMapping("/Contacts/{id}")
     Contact getContactById(@PathVariable Long id) {
-        return contactRepository.findById(id).orElseThrow(RuntimeException::new);
+        return contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id));
     }
 
     @PostMapping("/Contacts")
@@ -31,4 +28,8 @@ public class ContactController {
         return contactRepository.save(newContact);
     }
 
+    @DeleteMapping("/Contacts/{id}")
+    void deleteContact(@PathVariable Long id) {
+        contactRepository.deleteById(id);
+    }
 }
