@@ -38,15 +38,15 @@ public class Supplier {
     public String getCompanyName() {
         return this.companyName;
     }
-    public void setCompanyName(String newCompanyName) {
-        this.companyName = newCompanyName;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getBase() {
         return this.base;
     }
-    public void setBase(String newBase) {
-        this.base = newBase;
+    public void setBase(String base) {
+        this.base = base;
     }
 
     public ArrayList<Contact> getContacts() {

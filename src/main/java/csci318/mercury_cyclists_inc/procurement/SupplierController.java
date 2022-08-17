@@ -13,22 +13,22 @@ public class SupplierController {
         this.supplierRepository = supplierRepository;
     }
 
-    @GetMapping("/Suppliers")
+    @GetMapping("/suppliers")
     List<Supplier> findAllSupplier() {
         return supplierRepository.findAll();
     }
 
-    @GetMapping("/Suppliers/{id}")
+    @GetMapping("/suppliers/{id}")
     Supplier getSupplierById(@PathVariable Long id) {
         return supplierRepository.findById(id).orElseThrow(() -> new ContactNotFoundException(id));
     }
 
-    @PostMapping("/Suppliers")
+    @PostMapping("/suppliers")
     Supplier createSupplier(@RequestBody Supplier newSupplier) {
         return supplierRepository.save(newSupplier);
     }
 
-    // @PutMapping("/Suppliers/{id}")
+    // @PutMapping("/suppliers/{id}")
     // Supplier replaceSupplier(@RequestBody Supplier newSupplier, @PathVariable Long id) {
     //     return supplierRepository.findById(id).map(supplier -> {
     //         supplier.setCompanyName(newSupplier.getCompanyName());
@@ -40,7 +40,7 @@ public class SupplierController {
     //     });
     // }
 
-    @DeleteMapping("/Suppliers/{id}")
+    @DeleteMapping("/suppliers/{id}")
     void deleteSupplier(@PathVariable Long id) {
         supplierRepository.deleteById(id);
     }
