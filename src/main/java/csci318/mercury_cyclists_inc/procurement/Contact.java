@@ -11,8 +11,6 @@ public class Contact {
     @Id
     @GeneratedValue
     private long id;
-    
-    
 
     @Column
     private String firstName;
