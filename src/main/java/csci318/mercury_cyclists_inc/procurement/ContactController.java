@@ -71,7 +71,7 @@ public class ContactController {
     }
 
     // REST DELETE
-    @DeleteMapping
+    @DeleteMapping("/contacts/{id}")
     ResponseEntity<?> deleteContact(@PathVariable Long id) {
         contactRepository.deleteById(id);
 
