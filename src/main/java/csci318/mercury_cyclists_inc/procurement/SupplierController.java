@@ -9,7 +9,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,12 +16,14 @@ import java.util.stream.Collectors;
 public class SupplierController {
     
     private final SupplierRepository supplierRepository;
+    private final ContactRepository contactRepository;
 
     private final SupplierModelAssembler assembler;
 
 
-    SupplierController(SupplierRepository supplierRepository, SupplierModelAssembler assembler) {
+    SupplierController(SupplierRepository supplierRepository, ContactRepository contactRepository, SupplierModelAssembler assembler) {
         this.supplierRepository = supplierRepository;
+        this.contactRepository = contactRepository;
         this.assembler = assembler;
     }
 
@@ -69,6 +70,20 @@ public class SupplierController {
 
         return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
+    // Adding a contact
+    @PutMapping("/suppliers/{id}/contacts/{contactId}")
+    ResponseEntity<?> addContact(@PathVariable Long id, @PathVariable Long contactId) {
+        Supplier updatedSupplier = supplierRepository.findById(id).map(supplier -> {
+            Contact contact = contactRepository.findById(contactId).orElseThrow(() -> new ContactNotFoundException(id));
+            supplier.addContact(contact);
+            return supplierRepository.save(supplier);
+        }).orElseThrow(() -> new SupplierNotFoundException(id));
+
+        EntityModel<Supplier> entityModel = assembler.toModel(updatedSupplier);
+
+        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
+    }
+
 
     // REST DELETE
     @DeleteMapping("/suppliers/{id}")

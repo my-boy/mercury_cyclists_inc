@@ -12,12 +12,17 @@ public class Contact {
     @GeneratedValue
     private long id;
 
-    @Column
+    @Column(name = "firstName")
     private String firstName;
+    @Column(name = "lastName")
     private String lastName;
-    
+    @Column(name = "supplierId")
+    private Long supplierId;
+    @Column(name = "phone")
     private String phone;
+    @Column(name = "email")
     private String email;
+    @Column(name = "position")
     private String position;
 
     @ManyToOne
@@ -30,13 +35,15 @@ public class Contact {
     public Contact() {
         firstName = "";
         lastName = "";
+        supplierId = (long) -1;
         phone = "";
         email = "";
         position = "";
     }
-    public Contact(String firstName, String lastName, String phone, String email, String position) {
+    public Contact(String firstName, String lastName, Long supplierId, String phone, String email, String position) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.supplierId = supplierId;
         this.phone = phone;
         this.email = email;
         this.position = position;
@@ -66,6 +73,13 @@ public class Contact {
 
     public String getName() {
         return this.firstName + " " + this.lastName;
+    }
+
+    public Long getSupplierId() {
+        return supplierId;
+    }
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
     }
 
     public String getPhone() {

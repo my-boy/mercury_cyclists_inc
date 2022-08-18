@@ -1,8 +1,8 @@
 package csci318.mercury_cyclists_inc.procurement;
 
 import java.util.Objects;
-
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -11,19 +11,20 @@ public class Supplier {
     @Id
     @GeneratedValue
     private long id;
-
-    @Column
+    @Column(name = "name")
     private String companyName;
+    @Column(name = "base")
     private String base;
 
-    private ArrayList<Contact> contacts = new ArrayList<Contact>();
+    @OneToMany
+    private List<Contact> contacts = Collections.<Contact>emptyList();
 
     // constructors
     public Supplier() {
         companyName = "";
         base = "";
     }
-    public Supplier(String companyName, String base, ArrayList<Contact> contacts) {
+    public Supplier(String companyName, String base, List<Contact> contacts) {
         this.companyName = companyName;
         this.base = base;
         this.contacts = contacts;
@@ -51,14 +52,13 @@ public class Supplier {
         this.base = base;
     }
 
-    public ArrayList<Contact> getContacts() {
+    public List<Contact> getContacts() {
         return this.contacts;
     }
-    public void setContacts(ArrayList<Contact> contacts) {
+    public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
     }
 
-    
     public void addContact(Contact newContact) {
         this.contacts.add(newContact);
     }
