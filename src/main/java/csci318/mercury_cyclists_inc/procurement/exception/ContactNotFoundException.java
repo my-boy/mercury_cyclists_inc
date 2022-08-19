@@ -1,7 +1,7 @@
-package csci318.mercury_cyclists_inc.procurement;
+package csci318.mercury_cyclists_inc.procurement.exception;
 
 public class ContactNotFoundException extends RuntimeException {
-    ContactNotFoundException(Long id) {
+    public ContactNotFoundException(Long id) {
         super("Could not find contact id: " + id);
     }    
 }

@@ -1,7 +1,7 @@
-package csci318.mercury_cyclists_inc.procurement;
+package csci318.mercury_cyclists_inc.procurement.exception;
 
 public class SupplierNotFoundException extends RuntimeException {
-    SupplierNotFoundException(Long id) {
+    public SupplierNotFoundException(Long id) {
         super("Could not find supplier id: " + id);
     }    
 }
